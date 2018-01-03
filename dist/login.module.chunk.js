@@ -549,7 +549,7 @@ var SignupComponent = (function () {
             console.log(_this.msg);
             setTimeout(function () {
                 _this.router.navigate(['/login']);
-            }, 2000);
+            }, 3000);
         }, function (err) {
             _this.errors = err.msg;
             console.log(_this.errors);
