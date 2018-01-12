@@ -6,18 +6,20 @@ webpackJsonp(["main"],{
 var map = {
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module"
+		"dashboard.module",
+		"common"
 	],
 	"./login/login.module": [
 		"../../../../../src/app/login/login.module.ts",
-		"login.module"
+		"login.module",
+		"common"
 	]
 };
 function webpackAsyncContext(req) {
 	var ids = map[req];
 	if(!ids)
 		return Promise.reject(new Error("Cannot find module '" + req + "'."));
-	return __webpack_require__.e(ids[1]).then(function() {
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		return __webpack_require__(ids[0]);
 	});
 };
@@ -62,8 +64,8 @@ var AppRoutingModule = (function () {
 }());
 AppRoutingModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
-        exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
+        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forRoot(routes)],
+        exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
     })
 ], AppRoutingModule);
 
@@ -177,8 +179,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-// import {AccordionModule} from 'primeng/primeng';  
-// import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// import { NgxTypeaheadModule } from 'ngx-typeahead';
+// import { EqualValidator } from '../shared/directives/equal-validator.directive';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -219,7 +221,7 @@ AppModule = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return User; });
 var User = (function () {
-    function User(fullname, email, mobile, password, confirmpass, id, items) {
+    function User(fullname, email, mobile, password, confirmpass, id, items, pincode, address, city, state, gender) {
         this.fullname = fullname;
         this.email = email;
         this.mobile = mobile;
@@ -227,6 +229,11 @@ var User = (function () {
         this.confirmpass = confirmpass;
         this.id = id;
         this.items = items;
+        this.pincode = pincode;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.gender = gender;
     }
     return User;
 }());
@@ -381,7 +388,7 @@ var AuthGuard = (function () {
 }());
 AuthGuard = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object])
 ], AuthGuard);
 
 var _a;
@@ -477,11 +484,17 @@ var DashboardService = (function () {
     // item$=this.subject.asObservable();
     DashboardService.prototype.sendPath = function (path) {
         this.subject.next(path);
-        // console.log("dashboard",path)
     };
     DashboardService.prototype.getPath = function () {
         return this.subject;
     };
+    // private Subject = new Subject<any>();
+    // sendData(path: any) {
+    //   this.Subject.next(path);
+    // }
+    // getData(): Observable<any> {
+    //   return this.Subject.asObservable();
+    // }
     DashboardService.prototype.newUser = function (user) {
         var route = '/users/usercreation';
         return this.apiService.post(route, user)
@@ -491,6 +504,13 @@ var DashboardService = (function () {
     };
     DashboardService.prototype.getCurrentUser = function () {
         return this.currentUserSubject.value;
+    };
+    DashboardService.prototype.updateUser = function (user) {
+        var route = '/users/updateUser';
+        return this.apiService.put(route, user)
+            .map(function (data) {
+            return data;
+        });
     };
     DashboardService.prototype.authentUser = function (user) {
         var _this = this;
@@ -556,6 +576,33 @@ var DashboardService = (function () {
             return data;
         });
     };
+    DashboardService.prototype.manageAddress = function (data) {
+        var route = '/users/manageaddress';
+        return this.apiService.post(route, data)
+            .map(function (data) {
+            return data;
+        });
+    };
+    DashboardService.prototype.getAddress = function () {
+        var route = '/users/getaddress';
+        return this.apiService.get(route)
+            .map(function (data) {
+            return data.address;
+        });
+    };
+    DashboardService.prototype.updatePassword = function (data) {
+        return this.apiService.put('/users/updateepassword', data)
+            .map(function (data) {
+            return data;
+        });
+    };
+    DashboardService.prototype.getOrders = function () {
+        var route = '/cart/getorders';
+        return this.apiService.get(route)
+            .map(function (data) {
+            return data.orders;
+        });
+    };
     return DashboardService;
 }());
 DashboardService = __decorate([
@@ -615,7 +662,8 @@ JwtService = __decorate([
 // The file contents for the current environment will overwrite these during build.
 var environment = {
     production: false,
-    api_url: '/',
+    //api_url: '/',
+    api_url: 'http://localhost:3000',
 };
 //# sourceMappingURL=environment.js.map
 

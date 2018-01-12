@@ -1,5 +1,142 @@
 webpackJsonp(["dashboard.module"],{
 
+/***/ "../../../../../src/app/dashboard/components/buynow/buynow.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".panel{\n    margin-top: 15px;\n}\n.panel-default>.panel-heading {\n    color:white;\n    background-color: #256a95;\n     cursor: pointer;\n     height: 50px;\n}\n.pbody{\n    padding-left: 2pc;\n    padding-right: 2pc;\n}\n.myradiobtn{\n    position: absolute;\n    margin-top: 38px;\n    margin-left: -27px\n}\n.marginleft{\n    margin-left: 23px;\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/components/buynow/buynow.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n   <!-- login fields -->\n  <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <h4 class=\"panel-title\">\n                <a data-toggle=\"collapse\"  href=\"#collapseOne\">\n                  <span class=\"glyphicon glyphicon-ok\" *ngIf=\"token\">\n                </span>&nbsp;&nbsp;&nbsp;1.&nbsp;Login Id {{currentUser.email}}</a>\n            </h4>\n        </div>\n    <div id=\"collapseOne\" class=\"panel-collapse collapse\">\n        <div class=\"panel-body\">\n            <div class=\"\">\n        <p> You are already logged in as {{currentUser.email}}</p>\n            </div>\n\n</div>\n</div>\n</div>\n<!-- Select address fields -->\n<div class=\"panel panel-default\">\n    <div (click)=\"addressopen=!addressopen\"  [className]=\"addressopen?'panel-heading collapsed':'panel-heading'\" data-toggle=\"collapse\"  data-parent=\"#accordion\">\n        <h4 class=\"panel-title\">\n            <a>\n              <span class=\"glyphicon glyphicon-ok\" *ngIf=\"addressopen\">\n            </span>&nbsp;&nbsp;&nbsp;2.&nbsp;Select Address</a>\n        </h4>\n    </div>\n<div id=\"collapseTwo\" [className]=\"addressopen? 'panel-collapse collapse':'panel-collapse collapse in'\" >\n    <div class=\"panel-body pbody\">\n        <div class=\"\">\n            <!-- <input type=\"radio\" class=\"myradiobtn\"> -->\n\n            <div class=\"panel panel-default marginleft\" *ngFor=\"let address of userAddress;let idx=index;\">\n            <input type=\"radio\" class=\"myradiobtn\" [checked]=\"idx==index\" [value]=\"address\" [name]=\"address\"  (click)=\"myAddress(idx)\">\n              \n                <div class=\"panel-body\">\n                  <span>{{address.fullname}}</span>\n                 &nbsp;&nbsp; <span>{{address.mobile}}</span>\n                  <p>{{address.address}}</p>\n                  <div *ngIf=\"idx==index\">\n                      <button type=\"submit\" class=\"btn btn-info btn-md\"  (click)=\"deliver(address)\">\n                          Deliver to This Address</button>\n                  </div>\n\n                </div>\n\n              </div>\n      \n        </div>\n<!-- add address -->\n        <div class=\"panel panel-default\">\n            <div class=\"\" (click)=\" out = !out\" [className]=\"out?'panel-heading collapsed':'panel-heading'\" data-toggle=\"collapse\"  data-parent=\"#accordion\">\n                <h4 class=\"panel-title\">\n                    <a ><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n                    &nbsp;Add Address</a>\n                </h4>\n            </div>\n            <div id=\"collapse11\"  [className]=\"out? 'panel-collapse collapse':'panel-collapse collapse in'\">\n                <div class=\"panel-body\">\n                    <div class=\"row\">\n                      <form #myForm=\"ngForm\" >\n                        <div class=\"col-md-offset-3 col-md-6\">\n                            <div class=\"form-group\">\n                             <span>Full Name:</span>  \n                              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"data.fullname\" #fullname=\"ngModel\" name=\"fullname\" placeholder=\"\" required />\n                              <div *ngIf=\"fullname.errors && (fullname.dirty || fullname.touched)\" class=\"error\">\n                                  <div [hidden]=\"!fullname.errors.required\">Please fill out this field.</div>\n                              </div>\n                            \n                            </div>\n                            <div class=\"form-group\">\n                                <span>Mobile Number:</span>\n                                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"data.mobile\" name=\"mobile\" #mobile=\"ngModel\" pattern=\"^[6789]\\d{9}$\"  maxlength=\"10\"  placeholder=\"\" required />\n                           \n                                <div *ngIf=\"mobile.errors && (mobile.dirty || mobile.touched)\" class=\"error\">\n                                    <div [hidden]=\"!mobile.errors.required\">Please fill out this field..</div>\n                                    <div [hidden]=\"!mobile.errors.pattern\">Not a valid Mobile Number.</div>\n                                </div>\n                              </div>\n                            <div class=\"form-group\">\n                                <span>Pincode:</span>\n                                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"data.pincode\" name=\"pincode\" #pincode=\"ngModel\" placeholder=\"\" pattern=\"^[1-9][0-9]{5}$\"  maxlength=\"6\"  required />\n                                <div *ngIf=\"pincode.errors && (pincode.dirty || pincode.touched)\" class=\"error\">\n                                    <div [hidden]=\"!pincode.errors.required\">Please fill out this field..</div>\n                                    <div [hidden]=\"!pincode.errors.pattern\">Please Enter  Valid Pincode.</div>\n                                </div>\n                              </div>\n                            <div class=\"form-group\">\n                                <span>Address (Area and Street) <i>max 250 characters  only</i>:</span>\n                              \n                                <textarea class=\"form-control\"  [(ngModel)]=\"data.address\" placeholder=\"\" name=\"address\" #address=\"ngModel\" maxlength=\"250\" required></textarea>\n                                <div *ngIf=\"address.errors && (address.dirty || address.touched)\" class=\"error\">\n                                    <div [hidden]=\"!address.errors.required\">Please fill out this field.</div>\n                                </div>\n                              </div>\n                            <div class=\"form-group\">\n                                <span>City:</span>\n                                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"data.city\" #city=\"ngModel\" name=\"city\" placeholder=\"\" required />\n                           \n                                <div *ngIf=\"city.errors && (city.dirty || city.touched)\" class=\"error\">\n                                    <div [hidden]=\"!city.errors.required\">Please fill out this field.</div>\n                                </div>  \n                               </div>\n                            <div class=\"form-group\">\n                                <span>\n                                    State:</span>\n                                <select class=\"form-control\" [(ngModel)]=\"data.state\"  #state=\"ngModel\" name=\"state\" required>\n                                    <option value=\"\">Select State</option>\n                                    <option value=\"Andhara Predesh\">AP</option>\n                                    <option value=\"Telangana\">TS</option>\n                                    <!-- <option>Contact</option> -->\n                                </select>\n                                <div *ngIf=\"state.errors && (state.dirty || state.touched)\" class=\"error\">\n                                    <div [hidden]=\"!state.errors.required\">Please fill out this field.</div>\n                                </div>\n                            </div>\n                            <div class=\"form-group\">\n                                <button type=\"submit\" class=\"btn btn-info btn-md\" [disabled]=\"!myForm.form.valid\" (click)=\"save(data)\">\n                                    <i class=\"fa fa-floppy-o\" aria-hidden=\"true\" ></i>&nbsp;Save</button>\n                                <button type=\"button\" class=\"btn btn-danger btn-md\" (click)=\"cancel()\">\n                                    <i class=\"fa fa-times\" aria-hidden=\"true\" ></i> &nbsp;Cancel</button>\n                            </div>\n\n                        </div>\n                      </form>\n                    </div>\n                 \n                </div>\n            </div>\n        </div>\n\n\n</div>\n</div>\n</div>\n\n<div class=\"panel panel-default\">\n    <div class=\"panel-heading\">\n        <h4 class=\"panel-title\">\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseThree\">\n              <span class=\"glyphicon glyphicon-ok\" *ngIf=\"token\">\n            </span>&nbsp;&nbsp;&nbsp;3.&nbsp;Manage Orders</a>\n        </h4>\n    </div>\n<div id=\"collapseThree\" class=\"panel-collapse collapse\">\n    <div class=\"panel-body\">\n        <div class=\"\">\n          \n        </div>\n\n</div>\n</div>\n</div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/components/buynow/buynow.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuynowComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__ = __webpack_require__("../../../../../src/app/shared/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__ = __webpack_require__("../../../../../src/app/shared/services/jwt.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var BuynowComponent = (function () {
+    function BuynowComponent(dashboardservice, activeRouter, router, jwtservice) {
+        var _this = this;
+        this.dashboardservice = dashboardservice;
+        this.activeRouter = activeRouter;
+        this.router = router;
+        this.jwtservice = jwtservice;
+        this.out = true;
+        this.addressopen = false;
+        this.index = 0;
+        this.data = {
+            fullname: '',
+            pincode: '',
+            mobile: '',
+            address: '',
+            city: '',
+            state: ''
+        };
+        this.token = this.jwtservice.getToken();
+        this.subscription = dashboardservice.currentUser.subscribe(function (user) {
+            _this.currentUser = user;
+            _this.initData(_this.currentUser);
+        });
+    }
+    BuynowComponent.prototype.initData = function (currentUser) {
+        var _this = this;
+        var id = currentUser.id;
+        if (id) {
+            this.dashboardservice.getAddress().subscribe(function (res) {
+                _this.userAddress = res;
+                console.log(_this.userAddress);
+            });
+        }
+    };
+    BuynowComponent.prototype.save = function (data) {
+        var _this = this;
+        this.address = {
+            fullname: data.fullname,
+            mobile: data.mobile,
+            address: data.address + "," + data.city + "," + data.state + " " + "-" + " " + data.pincode
+        };
+        this.myForm.reset();
+        // this.collapse = "collapsed";
+        this.out = true;
+        console.log(this.address);
+        this.dashboardservice.manageAddress(this.address).subscribe(function (res) {
+            if (res) {
+                _this.dashboardservice.getAddress().subscribe(function (res) {
+                    _this.userAddress = res;
+                });
+            }
+        }, function (err) {
+            _this.errors = err.msg;
+            console.log(_this.errors);
+        });
+    };
+    BuynowComponent.prototype.myAddress = function (e) {
+        this.index = e;
+    };
+    BuynowComponent.prototype.deliver = function (address) {
+        console.log(address);
+        this.addressopen = true;
+    };
+    BuynowComponent.prototype.cancel = function () {
+        this.out = true;
+    };
+    BuynowComponent.prototype.ngOnInit = function () {
+    };
+    return BuynowComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])("myForm"),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_forms__["NgForm"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_forms__["NgForm"]) === "function" && _a || Object)
+], BuynowComponent.prototype, "myForm", void 0);
+BuynowComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-buynow',
+        template: __webpack_require__("../../../../../src/app/dashboard/components/buynow/buynow.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/dashboard/components/buynow/buynow.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _e || Object])
+], BuynowComponent);
+
+var _a, _b, _c, _d, _e;
+//# sourceMappingURL=buynow.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/dashboard/components/cart/cart.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -147,7 +284,7 @@ CartComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/components/cart/cart.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/components/cart/cart.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _d || Object])
 ], CartComponent);
 
 var _a, _b, _c, _d;
@@ -264,11 +401,113 @@ HomeComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/components/home/home.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/components/home/home.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _b || Object])
 ], HomeComponent);
 
 var _a, _b;
 //# sourceMappingURL=home.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/components/myaccount/changepassword/changepassword.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".panel{\n    margin-top: 15px;\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/components/myaccount/changepassword/changepassword.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n\n    <div class=\"alert alert-success alert-dismissable fade in\" *ngIf=\"msg && msg.Success == true\">\n            <a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n            <strong>Success!</strong> {{msg.msg}}.\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissable fade in\" *ngIf=\"errors\">\n            <a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n            <strong>Sorry!</strong> {{errors}}.\n        </div>\n    \n\n\n\n<h3>Reset Password</h3>\n<div class=\"panel panel-default\" >\n    <div class=\"panel-body\" >\n        <form #myForm=\"ngForm\" >\n\n        <div class=\"col-md-offset-3 col-md-6\">\n            <div class=\"form-group\">\n             <span>Old Password:</span>  \n              <input type=\"password\" class=\"form-control\" [(ngModel)]=\"resetpassword.oldpassword\" minlength=\"6\" #oldpassword=\"ngModel\" name=\"oldpassword\" placeholder=\"\" required />\n              \n              <div *ngIf=\"oldpassword.errors && (oldpassword.dirty || oldpassword.touched)\" class=\"error\">\n                  <div [hidden]=\"!oldpassword.errors.required\">Please Enter Old Password.</div>\n                  <div [hidden]=\"!oldpassword.errors.minlength\">Password shuld be min 6 Charactors.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n                <span>New Password:</span>  \n                 <input type=\"password\" class=\"form-control\" [(ngModel)]=\"resetpassword.newpassword\" #newpassword=\"ngModel\" minlength=\"6\" name=\"newpassword\" placeholder=\"\" required />\n                 <div *ngIf=\"newpassword.errors && (newpassword.dirty || newpassword.touched)\" class=\"error\">\n                    <div [hidden]=\"!newpassword.errors.required\">Please Enter New Password.</div>\n                    <div [hidden]=\"!newpassword.errors.minlength\">Password shuld be min 6 Charactors.</div>\n                </div>\n               \n               </div>   \n                 <div class=\"form-group\">\n                  <span>Confirm Password:</span>  \n                   <input type=\"password\" class=\"form-control\" [(ngModel)]=\"resetpassword.confirmpassword\"  validateEqual=\"newpassword\" minlength=\"6\" #confirmpassword=\"ngModel\" name=\"confirmpassword\" placeholder=\"\" required />\n                   <div *ngIf=\"confirmpassword.errors && (confirmpassword.dirty || confirmpassword.touched)\" class=\"error\">\n                      <div [hidden]=\"!confirmpassword.errors.required\">Please Enter Confirm Password.</div>\n                      <div [hidden]=\"!confirmpassword.errors.minlength\">Password shuld be min 6 Charactors.</div>\n                      <div [hidden]=\"confirmpassword.valid || (confirmpassword.pristine && !myForm.submitted)\">\n                          Password mismatch\n                      </div>\n                  </div>\n                 \n                 </div>\n                 <div class=\"form-group\">\n                    <button type=\"submit\" class=\"btn btn-info btn-md\" [disabled]=\"!myForm.form.valid\" (click)=\"Resetpassword(resetpassword)\">\n                        Reset Password</button>\n                    <button type=\"button\" class=\"btn btn-danger btn-md\" (click)=\"cancel()\">\n                        Cancel</button>\n                </div>\n            </div>\n            </form>\n    </div>\n\n  </div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/components/myaccount/changepassword/changepassword.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChangepasswordComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_dashboard_service__ = __webpack_require__("../../../../../src/app/shared/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_jwt_service__ = __webpack_require__("../../../../../src/app/shared/services/jwt.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ChangepasswordComponent = (function () {
+    function ChangepasswordComponent(dashboardservice, router, jwtservice) {
+        this.dashboardservice = dashboardservice;
+        this.router = router;
+        this.jwtservice = jwtservice;
+        this.resetpassword = {
+            oldpassword: '',
+            newpassword: '',
+            confirmpassword: ''
+        };
+    }
+    ChangepasswordComponent.prototype.Resetpassword = function (resetpassword) {
+        var _this = this;
+        console.log(resetpassword);
+        this.dashboardservice.updatePassword(resetpassword).subscribe(function (res) {
+            _this.msg = res;
+            console.log(res);
+        }, function (err) {
+            _this.errors = err.msg;
+            console.log(_this.errors);
+        });
+        this.myForm.reset();
+    };
+    ChangepasswordComponent.prototype.cancel = function () {
+        this.router.navigate(['']);
+    };
+    ChangepasswordComponent.prototype.ngOnInit = function () {
+    };
+    return ChangepasswordComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])("myForm"),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["NgForm"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["NgForm"]) === "function" && _a || Object)
+], ChangepasswordComponent.prototype, "myForm", void 0);
+ChangepasswordComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-changepassword',
+        template: __webpack_require__("../../../../../src/app/dashboard/components/myaccount/changepassword/changepassword.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/dashboard/components/myaccount/changepassword/changepassword.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _d || Object])
+], ChangepasswordComponent);
+
+var Resetpassword = (function () {
+    function Resetpassword() {
+    }
+    return Resetpassword;
+}());
+var _a, _b, _c, _d;
+//# sourceMappingURL=changepassword.component.js.map
 
 /***/ }),
 
@@ -280,7 +519,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "/* .form-inline .form-group { margin-right:10px; }\n.well-primary {\ncolor: rgb(255, 255, 255);\nbackground-color: rgb(66, 139, 202);\nborder-color: rgb(53, 126, 189);\n} */\n/* .glyphicon { margin-right:5px; } */\n.panel{\n    margin-top: 15px;\n}\n.panel-default>.panel-heading {\n    color:white;\n    background-color: #256a95;\n     cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -293,7 +532,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/components/myaccount/manageaddress/manageaddress.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  manageaddress works!\n</p>\n"
+module.exports = "             <h3>Manage Address</h3>\n              <div class=\"panel panel-default\">\n                  <div class=\"\" (click)=\" out = !out\" [className]=\"out?'panel-heading collapsed':'panel-heading'\" data-toggle=\"collapse\"  data-parent=\"#accordion\">\n                      <h4 class=\"panel-title\">\n                          <a ><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n                          &nbsp;Add Address</a>\n                      </h4>\n                  </div>\n                  <div id=\"collapseTwo\"  [className]=\"out? 'panel-collapse collapse':'panel-collapse collapse in'\">\n                      <div class=\"panel-body\">\n                          <div class=\"row\">\n                            <form #myForm=\"ngForm\" >\n                              <div class=\"col-md-offset-3 col-md-6\">\n                                  <div class=\"form-group\">\n                                   <span>Full Name:</span>  \n                                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"data.fullname\" #fullname=\"ngModel\" name=\"fullname\" placeholder=\"\" required />\n                                    <div *ngIf=\"fullname.errors && (fullname.dirty || fullname.touched)\" class=\"error\">\n                                        <div [hidden]=\"!fullname.errors.required\">Please fill out this field.</div>\n                                    </div>\n                                  \n                                  </div>\n                                  <div class=\"form-group\">\n                                      <span>Mobile Number:</span>\n                                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"data.mobile\" name=\"mobile\" #mobile=\"ngModel\" pattern=\"^[6789]\\d{9}$\"  maxlength=\"10\"  placeholder=\"\" required />\n                                 \n                                      <div *ngIf=\"mobile.errors && (mobile.dirty || mobile.touched)\" class=\"error\">\n                                          <div [hidden]=\"!mobile.errors.required\">Please fill out this field..</div>\n                                          <div [hidden]=\"!mobile.errors.pattern\">Not a valid Mobile Number.</div>\n                                      </div>\n                                    </div>\n                                  <div class=\"form-group\">\n                                      <span>Pincode:</span>\n                                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"data.pincode\" name=\"pincode\" #pincode=\"ngModel\" placeholder=\"\" pattern=\"^[1-9][0-9]{5}$\"  maxlength=\"6\"  required />\n                                      <div *ngIf=\"pincode.errors && (pincode.dirty || pincode.touched)\" class=\"error\">\n                                          <div [hidden]=\"!pincode.errors.required\">Please fill out this field..</div>\n                                          <div [hidden]=\"!pincode.errors.pattern\">Please Enter  Valid Pincode.</div>\n                                      </div>\n                                    </div>\n                                  <div class=\"form-group\">\n                                      <span>Address (Area and Street) <i>max 250 characters  only</i>:</span>\n                                    \n                                      <textarea class=\"form-control\"  [(ngModel)]=\"data.address\" placeholder=\"\" name=\"address\" #address=\"ngModel\" maxlength=\"250\" required></textarea>\n                                      <div *ngIf=\"address.errors && (address.dirty || address.touched)\" class=\"error\">\n                                          <div [hidden]=\"!address.errors.required\">Please fill out this field.</div>\n                                      </div>\n                                    </div>\n                                  <div class=\"form-group\">\n                                      <span>City:</span>\n                                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"data.city\" #city=\"ngModel\" name=\"city\" placeholder=\"\" required />\n                                 \n                                      <div *ngIf=\"city.errors && (city.dirty || city.touched)\" class=\"error\">\n                                          <div [hidden]=\"!city.errors.required\">Please fill out this field.</div>\n                                      </div>  \n                                     </div>\n                                  <div class=\"form-group\">\n                                      <span>\n                                          State:</span>\n                                      <select class=\"form-control\" [(ngModel)]=\"data.state\"  #state=\"ngModel\" name=\"state\" required>\n                                          <option value=\"\">Select State</option>\n                                          <option value=\"Andhara Predesh\">AP</option>\n                                          <option value=\"Telangana\">TS</option>\n                                          <!-- <option>Contact</option> -->\n                                      </select>\n                                      <div *ngIf=\"state.errors && (state.dirty || state.touched)\" class=\"error\">\n                                          <div [hidden]=\"!state.errors.required\">Please fill out this field.</div>\n                                      </div>\n                                  </div>\n                                  <div class=\"form-group\">\n                                      <button type=\"submit\" class=\"btn btn-info btn-md\" [disabled]=\"!myForm.form.valid\" (click)=\"save(data)\">\n                                          <i class=\"fa fa-floppy-o\" aria-hidden=\"true\" ></i>&nbsp;Save</button>\n                                      <button type=\"button\" class=\"btn btn-danger btn-md\" (click)=\"cancel()\">\n                                          <i class=\"fa fa-times\" aria-hidden=\"true\" ></i> &nbsp;Cancel</button>\n                                  </div>\n\n                              </div>\n                            </form>\n                          </div>\n                       \n                      </div>\n                  </div>\n              </div>\n \n\n              <div class=\"panel panel-default\" *ngFor=\"let address of userAddress\">\n                <div class=\"panel-body\" >\n                  <span>{{address.fullname}}</span>\n                 &nbsp;&nbsp; <span>{{address.mobile}}</span>\n                  <p>{{address.address}}</p>\n                  \n                </div>\n\n              </div>"
 
 /***/ }),
 
@@ -303,6 +542,10 @@ module.exports = "<p>\n  manageaddress works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ManageaddressComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__ = __webpack_require__("../../../../../src/app/shared/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__ = __webpack_require__("../../../../../src/app/shared/services/jwt.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -313,22 +556,83 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
 var ManageaddressComponent = (function () {
-    function ManageaddressComponent() {
+    function ManageaddressComponent(dashboardservice, router, jwtservice, ngzone) {
+        var _this = this;
+        this.dashboardservice = dashboardservice;
+        this.router = router;
+        this.jwtservice = jwtservice;
+        this.ngzone = ngzone;
+        this.out = true;
+        this.data = {
+            fullname: '',
+            pincode: '',
+            mobile: '',
+            address: '',
+            city: '',
+            state: ''
+        };
+        this.subscription = dashboardservice.currentUser.subscribe(function (user) {
+            _this.currentUser = user;
+            _this.initData(_this.currentUser);
+        });
     }
+    ManageaddressComponent.prototype.initData = function (currentUser) {
+        var _this = this;
+        var id = currentUser.id;
+        if (id) {
+            this.dashboardservice.getAddress().subscribe(function (res) {
+                _this.userAddress = res;
+            });
+        }
+    };
+    ManageaddressComponent.prototype.save = function (data) {
+        var _this = this;
+        this.address = {
+            fullname: data.fullname,
+            mobile: data.mobile,
+            address: data.address + "," + data.city + "," + data.state + " " + "-" + " " + data.pincode
+        };
+        this.myForm.reset();
+        // this.collapse = "collapsed";
+        this.out = true;
+        console.log(this.address);
+        this.dashboardservice.manageAddress(this.address).subscribe(function (res) {
+            if (res) {
+                _this.dashboardservice.getAddress().subscribe(function (res) {
+                    _this.userAddress = res;
+                });
+            }
+        }, function (err) {
+            _this.errors = err.msg;
+            console.log(_this.errors);
+        });
+    };
+    ManageaddressComponent.prototype.cancel = function () {
+        this.out = true;
+    };
     ManageaddressComponent.prototype.ngOnInit = function () {
     };
     return ManageaddressComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])("myForm"),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_forms__["NgForm"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_forms__["NgForm"]) === "function" && _a || Object)
+], ManageaddressComponent.prototype, "myForm", void 0);
 ManageaddressComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-manageaddress',
         template: __webpack_require__("../../../../../src/app/dashboard/components/myaccount/manageaddress/manageaddress.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/components/myaccount/manageaddress/manageaddress.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _e || Object])
 ], ManageaddressComponent);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=manageaddress.component.js.map
 
 /***/ }),
@@ -354,7 +658,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/components/myaccount/myaccount.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row row1\">\n  <!-- <div class=\"col-xs-12 col-sm-2\"> -->\n     <!-- I was motivated to create this after seeing BhaumikPatel's http://bootsnipp.com/snippets/featured/accordion-menu; I adapted it to a list format rather than a table so that it would be easy to create a nav toggle button when viewed on mobile devices -->\n  <div class=\" col-xs-12 col-md-3\">\n      <div id=\"sidenav1\">\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#sideNavbar\"> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> </button>\n        </div>\n        <div class=\"collapse navbar-collapse\" id=\"sideNavbar\">\n          <div class=\"panel-group\" id=\"accordion\">\n            <div class=\"panel panel-default\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n              <div class=\"panel-heading\">\n                <h4 class=\"panel-title\"><a routerLink=\"/myaccount\" ><i class=\"fa fa-cubes\" aria-hidden=\"true\"></i>&nbsp;Orders</a> </h4>\n              </div>\n            </div>\n            <div class=\"panel panel-default\">\n              <div class=\"panel-heading\">\n                <h4 class=\"panel-title\"> <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\"><span><i class=\"fa fa-cogs\" aria-hidden=\"true\"></i></span>&nbsp;Account Settings<span class=\"caret\"></span></a> </h4>\n              </div>\n              <!-- Note: By adding \"in\" after \"collapse\", it starts with that particular panel open by default; remove if you want them all collapsed by default --> \n              <div id=\"collapseOne\" class=\"panel-collapse collapse in\">\n                <ul class=\"list-group\">\n                  <li><a routerLink=\"/myaccount/accountettings/personalinformation\"  routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">Personal Information</a></li>\n                  <li><a routerLink=\"/myaccount/accountettings/manageaddress\" routerLinkActive=\"active\"  >Manage Address</a></li>\n                  <!-- <li><a href=\"\" class=\"navlink\">Link 3</a></li>\n                  <li><a href=\"\" class=\"navlink\">Link 4</a></li> -->\n                </ul>\n              </div>\n            </div>\n            <div class=\"panel panel-default\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\" *ngIf=\"role\">\n                <div class=\"panel-heading\">\n                  <h4 class=\"panel-title\"><a routerLink=\"/myaccount/uplodeproducts\" ><i class=\"fa fa-upload\" aria-hidden=\"true\"></i>&nbsp;Uplode Product Detials</a> </h4>\n                </div>\n              </div>\n              <div class=\"panel panel-default\">\n                  <div class=\"panel-heading\">\n                    <h4 class=\"panel-title\"><a (click)=\"logout()\"><i class=\"fa fa-power-off\" aria-hidden=\"true\"></i>&nbsp;Logout</a> </h4>\n                  </div>\n                </div>\n\n\n           \n            <!-- This is in case you want to add additional links that will only show once the Nav button is engaged; delete if you don't need -->\n            <!-- <div class=\"menu-hide\">\n              <div class=\"panel panel-default\">\n                <div class=\"panel-heading\">\n                  <h4 class=\"panel-title\"><a href=\"\"><span class=\"glyphicon glyphicon-new-window\"></span>External Link</a> </h4>\n                </div>\n              </div>\n              <div class=\"panel panel-default\">\n                <div class=\"panel-heading\">\n                  <h4 class=\"panel-title\"><a href=\"\"><span class=\"glyphicon glyphicon-new-window\"></span>External Link</a> </h4>\n                </div>\n              </div>\n            </div> -->\n            <!-- end hidden Menu items --> \n          </div>\n        </div>\n      </div>\n    </div>\n    \n    <!-- </div> -->\n    <div class=\"col-xs-12 col-md-9\">\n        <router-outlet></router-outlet>\n      </div>\n      \n</div>\n"
+module.exports = "<div class=\"row row1\">\n  <!-- <div class=\"col-xs-12 col-sm-2\"> -->\n     <!-- I was motivated to create this after seeing BhaumikPatel's http://bootsnipp.com/snippets/featured/accordion-menu; I adapted it to a list format rather than a table so that it would be easy to create a nav toggle button when viewed on mobile devices -->\n  <div class=\" col-xs-12 col-md-3\">\n      <div id=\"sidenav1\">\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#sideNavbar\"> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> </button>\n        </div>\n        <div class=\"collapse navbar-collapse\" id=\"sideNavbar\">\n          <div class=\"panel-group\" id=\"accordion\">\n            <div class=\"panel panel-default\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n              <div class=\"panel-heading\">\n                <h4 class=\"panel-title\"><a routerLink=\"/myaccount\" ><i class=\"fa fa-cubes\" aria-hidden=\"true\"></i>&nbsp;Orders</a> </h4>\n              </div>\n            </div>\n            <div class=\"panel panel-default\">\n              <div class=\"panel-heading\">\n                <h4 class=\"panel-title\"> <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\"><span><i class=\"fa fa-cogs\" aria-hidden=\"true\"></i></span>&nbsp;Account Settings<span class=\"caret\"></span></a> </h4>\n              </div>\n              <!-- Note: By adding \"in\" after \"collapse\", it starts with that particular panel open by default; remove if you want them all collapsed by default --> \n              <div id=\"collapseOne\" class=\"panel-collapse collapse\">\n                <ul class=\"list-group\">\n                  <li><a routerLink=\"/myaccount/accountettings/personalinformation\"  routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">Personal Information</a></li>\n                  <li><a routerLink=\"/myaccount/accountettings/manageaddress\" routerLinkActive=\"active\"  >Manage Address</a></li>\n                  <li><a routerLink=\"/myaccount/accountettings/changepassword\" routerLinkActive=\"active\"  >Change Password</a></li>\n                  \n                  <!-- <li><a href=\"\" class=\"navlink\">Link 3</a></li>\n                  <li><a href=\"\" class=\"navlink\">Link 4</a></li> -->\n                </ul>\n              </div>\n            </div>\n            <div class=\"panel panel-default\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\" *ngIf=\"role\">\n                <div class=\"panel-heading\">\n                  <h4 class=\"panel-title\"><a routerLink=\"/myaccount/uplodeproducts\" ><i class=\"fa fa-upload\" aria-hidden=\"true\"></i>&nbsp;Uplode Product Detials</a> </h4>\n                </div>\n              </div>\n              <div class=\"panel panel-default\">\n                  <div class=\"panel-heading\">\n                    <h4 class=\"panel-title\"><a (click)=\"logout()\"><i class=\"fa fa-power-off\" aria-hidden=\"true\"></i>&nbsp;Logout</a> </h4>\n                  </div>\n                </div>\n\n\n           \n            <!-- This is in case you want to add additional links that will only show once the Nav button is engaged; delete if you don't need -->\n            <!-- <div class=\"menu-hide\">\n              <div class=\"panel panel-default\">\n                <div class=\"panel-heading\">\n                  <h4 class=\"panel-title\"><a href=\"\"><span class=\"glyphicon glyphicon-new-window\"></span>External Link</a> </h4>\n                </div>\n              </div>\n              <div class=\"panel panel-default\">\n                <div class=\"panel-heading\">\n                  <h4 class=\"panel-title\"><a href=\"\"><span class=\"glyphicon glyphicon-new-window\"></span>External Link</a> </h4>\n                </div>\n              </div>\n            </div> -->\n            <!-- end hidden Menu items --> \n          </div>\n        </div>\n      </div>\n    </div>\n    \n    <!-- </div> -->\n    <div class=\"col-xs-12 col-md-9\">\n        <router-outlet></router-outlet>\n      </div>\n      \n</div>\n"
 
 /***/ }),
 
@@ -406,7 +710,7 @@ MyaccountComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/components/myaccount/myaccount.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/components/myaccount/myaccount.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object])
 ], MyaccountComponent);
 
 var _a, _b, _c;
@@ -422,7 +726,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".panel{\n    margin-top: 15px;\n}", ""]);
 
 // exports
 
@@ -435,7 +739,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/components/myaccount/personalinformation/personalinformation.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  personalinformation works!\n</p>\n"
+module.exports = "<h3>Personal Information</h3>\n<div class=\"panel panel-default\" >\n    <div class=\"panel-body\">\n        <form #myForm=\"ngForm\" >\n            <div class=\"col-md-offset-3 col-md-6\">\n                <div class=\"form-group\">\n                 <span>Full Name:</span>  \n                  <input type=\"text\" class=\"form-control\" [disabled]=\"isEdit\" [(ngModel)]=\"user.full_name\" #fullname=\"ngModel\"  name=\"fullname\" placeholder=\"\" required />\n                  <div *ngIf=\"fullname.errors && (fullname.dirty || fullname.touched)\" class=\"error\">\n                      <div [hidden]=\"!fullname.errors.required\">Please fill out this field.</div>\n                  </div>\n                  </div>\n                  <div class=\"form-group\">\n                      <span>\n                          Your Gender is:</span>\n                      <select class=\"form-control\" [(ngModel)]=\"user.gender\" [disabled]=\"isEdit\"  #gender=\"ngModel\"  name=\"gender\" required>\n                          <option value=\"\">I am ...</option>\n                          <option value=\"male\">Male</option>\n                          <option value=\"female\">Female</option>\n                          <!-- <option>Contact</option> -->\n                      </select>\n                      <!-- <div *ngIf=\"state.errors && (state.dirty || state.touched)\" class=\"error\">\n                          <div [hidden]=\"!state.errors.required\">Please fill out this field.</div>\n                      </div> -->\n                  </div>\n\n                  <div class=\"form-group\">\n                      <span>Mobile Number:</span>\n                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.mobile\" [disabled]=\"isEdit\" name=\"mobile\" #mobile=\"ngModel\"  pattern=\"^[6789]\\d{9}$\"  maxlength=\"10\"  placeholder=\"\" required />\n                 \n                      <div *ngIf=\"mobile.errors && (mobile.dirty || mobile.touched)\" class=\"error\">\n                          <div [hidden]=\"!mobile.errors.required\">Please fill out this fiel..</div>\n                          <div [hidden]=\"!mobile.errors.pattern\">Not a valid Mobile Number.</div>\n                      </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <span>Your E-mail ID</span>\n                        <input type=\"text\"  class=\"form-control\" [(ngModel)]=\"user.email\" [disabled]=\"isEdit\" pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$\"  name=\"email\" #email=\"ngModel\" required>\n                        <div *ngIf=\"email.errors && (email.dirty || email.touched)\" class=\"error\">\n                            <div [hidden]=\"!email.errors.required\">Please fill out this field.</div>\n                            <div [hidden]=\"!email.errors.pattern\">Please Enter proper Email correctly.</div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <button type=\"submit\" class=\"btn btn-info btn-md\"  *ngIf=isEdit (click)=\"enableEdit()\" >\n                            <i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</button>\n                        <button type=\"submit\" class=\"btn btn-info btn-md\" *ngIf=!isEdit (click)=\"onSave(user)\">\n                            <i class=\"fa fa-floppy-o\"></i>&nbsp;Save</button>\n                        <button type=\"button\" class=\"btn btn-danger btn-md\" *ngIf=!isEdit (click)=\"cancel()\">\n                            <i class=\"fa fa-times\"></i> &nbsp;Cancel</button>\n                    </div>\n\n     </div>\n     </form>\n    </div>\n\n  </div>"
 
 /***/ }),
 
@@ -445,6 +749,13 @@ module.exports = "<p>\n  personalinformation works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PersonalinformationComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__ = __webpack_require__("../../../../../src/app/shared/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__ = __webpack_require__("../../../../../src/app/shared/services/jwt.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_pairwise__ = __webpack_require__("../../../../rxjs/add/operator/pairwise.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_pairwise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_pairwise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_filter__ = __webpack_require__("../../../../rxjs/add/operator/filter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_filter__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -455,10 +766,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
+
 var PersonalinformationComponent = (function () {
-    function PersonalinformationComponent() {
+    function PersonalinformationComponent(dashboardservice, router, jwtservice) {
+        var _this = this;
+        this.dashboardservice = dashboardservice;
+        this.router = router;
+        this.jwtservice = jwtservice;
+        this.isEdit = true;
+        this.subscription = dashboardservice.currentUser.subscribe(function (user) {
+            _this.user = user;
+            // console.log(this.user);
+        });
+        // this.router.events
+        // .filter(e => e instanceof NavigationEnd)
+        // .pairwise().subscribe((e) => {
+        //     console.log(e);
+        // });
     }
+    PersonalinformationComponent.prototype.enableEdit = function () {
+        this.isEdit = false;
+    };
+    PersonalinformationComponent.prototype.onSave = function (user) {
+        //  this.user["gender"]=user.gender;
+        this.dashboardservice.updateUser(this.user).subscribe(function (res) {
+            console.log(res.msg);
+        });
+        this.isEdit = true;
+    };
+    PersonalinformationComponent.prototype.cancel = function () {
+        this.isEdit = true;
+        // this.router.navigate(['/']);
+    };
     PersonalinformationComponent.prototype.ngOnInit = function () {
+        // let currentUrl = this.router.url;
+        // console.log(currentUrl)
     };
     return PersonalinformationComponent;
 }());
@@ -468,9 +814,10 @@ PersonalinformationComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/components/myaccount/personalinformation/personalinformation.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/components/myaccount/personalinformation/personalinformation.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object])
 ], PersonalinformationComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=personalinformation.component.js.map
 
 /***/ }),
@@ -483,7 +830,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".panel{\n    margin-top: 15px;\n}", ""]);
 
 // exports
 
@@ -506,6 +853,9 @@ module.exports = "<p>\n  uplodeproducts works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UplodeproductsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__ = __webpack_require__("../../../../../src/app/shared/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__ = __webpack_require__("../../../../../src/app/shared/services/jwt.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -516,8 +866,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var UplodeproductsComponent = (function () {
-    function UplodeproductsComponent() {
+    function UplodeproductsComponent(dashboardservice, router, jwtservice) {
+        this.dashboardservice = dashboardservice;
+        this.router = router;
+        this.jwtservice = jwtservice;
     }
     UplodeproductsComponent.prototype.ngOnInit = function () {
     };
@@ -529,9 +885,10 @@ UplodeproductsComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/components/myaccount/uplodeproducts/uplodeproducts.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/components/myaccount/uplodeproducts/uplodeproducts.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object])
 ], UplodeproductsComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=uplodeproducts.component.js.map
 
 /***/ }),
@@ -544,7 +901,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\n.mgtop{\n    margin-top: 19px;\n}\n._isOrders{\n    /* box-shadow: 1px 0px 3px 2px #d6cbcb; */\n    padding-top: 20px;\n    padding-bottom: 20px;\n    margin-top: 50px;\n    font-family: fantasy;\n    color: grey;\n    margin-bottom: 50px;\n}\n.panel-order .row {\n\tborder-bottom: 1px solid #ccc;\n}\n.panel-order .row:last-child {\n\tborder: 0px;\n}\n.panel-order .row .col-md-1  {\n\ttext-align: center;\n\tpadding-top: 15px;\n}\n.panel-order .row .col-md-1 img {\n\twidth: 50px;\n\tmax-height: 50px;\n}\n.panel-order .row .row {\n\tborder-bottom: 0;\n}\n.panel-order .row .col-md-11 {\n\tborder-left: 1px solid #ccc;\n}\n.panel-order .row .row .col-md-12 {\n\tpadding-top: 7px;\n\tpadding-bottom: 7px; \n}\n.panel-order .row .row .col-md-12:last-child {\n\tfont-size: 11px; \n\tcolor: #555;  \n\tbackground: #efefef;\n}\n.panel-order .btn-group {\n\tmargin: 0px;\n\tpadding: 0px;\n}\n.panel-order .panel-body {\n\tpadding-top: 0px;\n\tpadding-bottom: 0px;\n}\n.panel-order .panel-deading {\n\tmargin-bottom: 0;\n}                    ", ""]);
+exports.push([module.i, "\n._isOrders{\n    padding-top: 20px;\n    padding-bottom: 20px;\n    margin-top: 50px;\n    font-family: fantasy;\n    color: grey;\n    margin-bottom: 50px;\n}\n.panel{\n    margin-top: 15px;\n}\n._orderborder{\n\tborder: 1px solid #8b99a2;\n    padding-top: 1pc;\n    padding-bottom: 1pc;\n\tborder-radius: 3px;\n\tmargin-bottom: 1pc;\n\tmargin-top: 1pc;\n}\n._isorderImgborder{\n\tborder-bottom: 1px dotted #6b6363;\n    padding-bottom: 1pc;\n}\n.innerborder{\n\tpadding-top: 1pc;\n}\n.media-object{\n\theight: 8pc;\n}\n.btn-primary{\n\tmargin-top: 20px !important;\n}\n#mycontainer{\n    /* width: auto; */\n    padding-left: 3pc;\n    padding-right: 3pc;\n}", ""]);
 
 // exports
 
@@ -557,7 +914,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/components/orders/orders.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"_isOrders\">\n  <h3 class=\"text-center\">You Have No Orders</h3>\n</div>\n\n\n<div class=\"panel panel-default panel-order mgtop\" *ngIf=\"\">\n  <div class=\"panel-heading\">\n      <strong>Order history</strong>\n      <div class=\"btn-group pull-right\">\n          <div class=\"btn-group\">\n\t\t\t<button type=\"button\" class=\"btn btn-default btn-xs dropdown-toggle\" data-toggle=\"dropdown\">\n\t\t\t  Filter history <i class=\"fa fa-filter\"></i>\n\t\t\t</button>\n\t\t\t<ul class=\"dropdown-menu dropdown-menu-right\">\n\t\t\t  <li><a href=\"#\">Approved orders</a></li>\n\t\t\t  <li><a href=\"#\">Pending orders</a></li>\n\t\t\t</ul>\n\t\t  </div>\n\t\t</div>\n  </div>\n\n<div class=\"panel-body\">\n  \t<div class=\"row\">\n\t  <div class=\"col-md-1\"><img src=\"https://bootdey.com/img/Content/user_3.jpg\" class=\"media-object img-thumbnail\"></div>\n\t  <div class=\"col-md-11\">\n\t\t<div class=\"row\">\n\t\t  <div class=\"col-md-12\">\n\t\t\t<div class=\"pull-right\"><label class=\"label label-danger\">rejected</label> </div>\n\t\t\t<span><strong>Order name</strong></span> <span class=\"label label-info\">group name</span><br>\n\t\t\tQuantity : 2, cost: $323.13 <br>\n\t\t\t<a data-placement=\"top\" class=\"btn btn-success btn-xs glyphicon glyphicon-ok\" href=\"\" title=\"View\"></a>\n\t\t\t<a data-placement=\"top\" class=\"btn btn-danger  btn-xs glyphicon glyphicon-trash\" href=\"\" title=\"Danger\"></a>\n\t\t\t<a data-placement=\"top\" class=\"btn btn-info  btn-xs glyphicon glyphicon-usd\" href=\"\" title=\"Danger\"></a>\n\t\t  </div>\n\t\t  <div class=\"col-md-12\">\n\t\t\torder made on: 05/31/2014 by <a href=\"#\">Jane Doe </a>\n\t\t  </div>\n\t\t</div>\n\t  </div>\n\t</div>\n\n    \n\t</div>\n</div>"
+module.exports = "\n<div class=\"_isOrders\" *ngIf=\"ordercount==0\">\n  <h3 class=\"text-center\">You Have No Orders</h3>\n</div>\n\n<div class=\"\" id=\"mycontainer\" *ngIf=\"!ordercount==0\">\n\t<h4>My Account > Orders</h4>\n<div class=\"row _orderborder\" *ngFor=\"let order of orders\">\n\t<div class=\"col-xs-12 _isorderImgborder\">\n\t\t<label>Order Id </label>&nbsp;<span>{{order.orderId}}</span>\n\t\t<p>Placed On {{order.date | date:'medium'}} </p>\n\t\t<h5>Total Amount :&nbsp;<i class=\"fa fa-inr\" aria-hidden=\"true\"></i>{{order.cost}}</h5>\n\t</div>\n   <div class=\" col-xs-12 col-sm-6  col-md-2 innerborder\">\n\t\t<img [src]=\"order.href\"   class=\"media-object img-thumbnail\">\n\n</div>\n<div class=\" col-xs-12 col-sm-6  col-md-7 innerborder\">\n\t\t<h5>{{order.name}}</h5>\n\t\t<p><label>Qty :&nbsp;</label>{{order.qty}}</p>\n\t\t<p><label>Weight :&nbsp;</label>{{order.weight}} Kg</p>\n</div>\n<div class=\"col-md-2 innerborder\">\n\t\t<button type=\"button\" class=\"btn btn-primary \">Cancel Your Order</button>\n\t\t<button type=\"button\" class=\"btn btn-primary \">Return Your Order</button>\n\n\t</div>\n</div>\n\n</div>\n\n\n<!-- \n\t\t</div>\n\n\t</div>\n -->\n"
 
 /***/ }),
 
@@ -567,6 +924,9 @@ module.exports = "\n<div class=\"_isOrders\">\n  <h3 class=\"text-center\">You H
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrdersComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__ = __webpack_require__("../../../../../src/app/shared/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__ = __webpack_require__("../../../../../src/app/shared/services/jwt.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -577,9 +937,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var OrdersComponent = (function () {
-    function OrdersComponent() {
+    function OrdersComponent(dashboardservice, router, jwtservice) {
+        var _this = this;
+        this.dashboardservice = dashboardservice;
+        this.router = router;
+        this.jwtservice = jwtservice;
+        this.subscription = dashboardservice.currentUser.subscribe(function (user) {
+            _this.currentUser = user;
+            _this.initData(_this.currentUser);
+        });
     }
+    OrdersComponent.prototype.initData = function (currentUser) {
+        var _this = this;
+        var id = currentUser.id;
+        if (id) {
+            this.dashboardservice.getOrders().subscribe(function (res) {
+                _this.orders = res;
+                _this.ordercount = _this.orders.length;
+                console.log(_this.ordercount);
+            });
+        }
+    };
     OrdersComponent.prototype.ngOnInit = function () {
     };
     return OrdersComponent;
@@ -590,9 +972,10 @@ OrdersComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/components/orders/orders.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/components/orders/orders.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object])
 ], OrdersComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=orders.component.js.map
 
 /***/ }),
@@ -618,7 +1001,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/components/productdetails/productdetails.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container\">\n\n\t\t<!-- <figure  *ngIf=\"_dotLoder\">\n\t\t\t\t<div class=\"dot white\"></div>\n\t\t\t\t<div class=\"dot\"></div>\n\t\t\t\t<div class=\"dot\"></div>\n\t\t\t\t<div class=\"dot\"></div>\n\t\t\t\t<div class=\"dot\"></div>\n\t\t</figure> -->\n\n  \t<div class=\"card\" >\n\t\t\t<div class=\"container-fliud\">\n\t\t\t\t<div class=\"wrapper row\" *ngIf=\"data\">\n\t\t\t\t\t<div class=\"preview col-md-6\">\n\t\t\t\t\t\t\n\t\t\t\t\t\t<div class=\"preview-pic tab-content\"  >\n\t\t\t\t\t\t  <div class=\"tab-pane active\" id=\"pic-1\"><img [src] =\"data.href\"/></div>\n\t\t\t\t\t\t  \n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"details col-md-6\" >\n\t\t\t\t\t\t<h3 class=\"product-title\">{{data.name}}</h3>\n\t\t\t\t\t\t<div class=\"rating\">\n\t\t\t\t\t\t\t<div class=\"stars\">\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star checked\"></span>\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star checked\"></span>\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star checked\"></span>\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star\"></span>\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star\"></span>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<span class=\"review-no\">41 reviews</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<p class=\"product-description\">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>\n\t\t\t\t\t\t<h4 class=\"price\">current price: <span><i class=\"fa fa-inr\" aria-hidden=\"true\"></i>&nbsp;{{data.cost}}</span></h4>\n\t\t\t\t\t\t<p class=\"vote\"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>\n\t\t\t\t\t\t<h5 class=\"sizes\">Net Weight:\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t{{data.weight}} Kg\n\t\t\t\t\t\t</h5>\n\t\t\t\t\t\t<div>\n              <label>Quantity:</label>\n              <input type=number id=\"qty\" [value]=\"qty\" [(ngModel)]=\"qty\" name=\"quantity\" min=\"1\">\n            </div>\n\t\t\t\t\t\t<div class=\"action\">\n              <button class=\"add-to-cart btn btn-default\" (click)=\"addcart(data,qty)\" type=\"button\"><i class=\"fa fa-spinner fa-spin\" *ngIf=\"_dotLoder\"></i> &nbsp;add to cart</button>\n\t\t\t\t\t\t\t<button class=\"add-to-cart btn btn-default\" type=\"button\" (click)=\"buyNow(data,qty)\">Buy Now</button>\n              \n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div> \n\t\t\t</div>\n\t\t</div>\n\t</div>"
+module.exports = "\n<div class=\"container\">\n\n\t\t<!-- <figure  *ngIf=\"_dotLoder\">\n\t\t\t\t<div class=\"dot white\"></div>\n\t\t\t\t<div class=\"dot\"></div>\n\t\t\t\t<div class=\"dot\"></div>\n\t\t\t\t<div class=\"dot\"></div>\n\t\t\t\t<div class=\"dot\"></div>\n\t\t</figure> -->\n\n  \t<div class=\"card\" >\n\t\t\t<div class=\"container-fliud\">\n\t\t\t\t<div class=\"wrapper row\" *ngIf=\"data\">\n\t\t\t\t\t<div class=\"preview col-md-6\">\n\t\t\t\t\t\t\n\t\t\t\t\t\t<div class=\"preview-pic tab-content\"  >\n\t\t\t\t\t\t  <div class=\"tab-pane active\" id=\"pic-1\"><img [src] =\"data.href\"/></div>\n\t\t\t\t\t\t  \n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"details col-md-6\" >\n\t\t\t\t\t\t<h3 class=\"product-title\">{{data.name}}</h3>\n\t\t\t\t\t\t<div class=\"rating\">\n\t\t\t\t\t\t\t<div class=\"stars\">\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star checked\"></span>\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star checked\"></span>\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star checked\"></span>\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star\"></span>\n\t\t\t\t\t\t\t\t<span class=\"fa fa-star\"></span>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<span class=\"review-no\">41 reviews</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<p class=\"product-description\">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>\n\t\t\t\t\t\t<h4 class=\"price\">current price: <span><i class=\"fa fa-inr\" aria-hidden=\"true\"></i>&nbsp;{{data.cost * qty}}</span></h4>\n\t\t\t\t\t\t<p class=\"vote\"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>\n\t\t\t\t\t\t<h5 class=\"sizes\">Net Weight:\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t{{data.weight}} Kg\n\t\t\t\t\t\t</h5>\n\t\t\t\t\t\t<div>\n              <label>Quantity:</label>\n              <input type=number id=\"qty\" [value]=\"qty\" [(ngModel)]=\"qty\" name=\"quantity\" min=\"1\">\n            </div>\n\t\t\t\t\t\t<div class=\"action\">\n                            <button class=\"add-to-cart btn btn-default\" (click)=\"addcart(data,qty)\" type=\"button\"><i class=\"fa fa-spinner fa-spin\" *ngIf=\"_dotLoder\"></i> &nbsp;add to cart</button>\n\t\t\t\t\t\t\t<button class=\"add-to-cart btn btn-default\" type=\"button\" (click)=\"buyNow(data,qty)\"><i class=\"fa fa-spinner fa-spin\" *ngIf=\"_isdotLoder\"></i> &nbsp; Buy Now</button>\n              \n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div> \n\t\t\t</div>\n\t\t</div>\n\t</div>"
 
 /***/ }),
 
@@ -645,6 +1028,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ProductdetailsComponent = (function () {
+    // productData:any;
     function ProductdetailsComponent(dashboardservice, zone, router, jwtservice) {
         var _this = this;
         this.dashboardservice = dashboardservice;
@@ -699,12 +1083,42 @@ var ProductdetailsComponent = (function () {
         }
     };
     ProductdetailsComponent.prototype.buyNow = function (data, qty) {
+        var _this = this;
         data["qty"] = qty;
         data["id"] = this.currentUser.id;
-        console.log(data);
-        this.dashboardservice.buyNow(data).subscribe(function (res) {
-            console.log(res);
-        });
+        //  data.cost=data.cost * qty;
+        var id = this.currentUser.id;
+        //  let productData=data;
+        if (!this.token) {
+            this.router.navigate(['/login']);
+        }
+        else {
+            this.dashboardservice.addCartitems(data).subscribe(function (items) {
+                console.log(items);
+                if (items.Success == true) {
+                    _this.dashboardservice.getItems(id)
+                        .subscribe(function (res) {
+                        // this._dotLoder=false;
+                        _this.items = res.items;
+                        _this.length = _this.items.length;
+                        _this.dashboardservice.sendPath(_this.length);
+                    });
+                }
+            }, function (err) {
+                _this.errors = err;
+                console.log(_this.errors);
+            });
+            this.router.navigate(['buynow']);
+            //     data["qty"]=qty;
+            //     data["id"]=this.currentUser.id;
+            //     data.cost=data.cost * qty;
+            //     this._isdotLoder=true;
+            //     // console.log(data)
+            //    this.dashboardservice.buyNow(data).subscribe(res=>{
+            //    console.log(res);
+            //    this._isdotLoder=false;
+            // })
+        }
     };
     ProductdetailsComponent.prototype.ngOnInit = function () {
     };
@@ -716,7 +1130,7 @@ ProductdetailsComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/components/productdetails/productdetails.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/components/productdetails/productdetails.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _d || Object])
 ], ProductdetailsComponent);
 
 var _a, _b, _c, _d;
@@ -740,6 +1154,8 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_myaccount_personalinformation_personalinformation_component__ = __webpack_require__("../../../../../src/app/dashboard/components/myaccount/personalinformation/personalinformation.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_myaccount_manageaddress_manageaddress_component__ = __webpack_require__("../../../../../src/app/dashboard/components/myaccount/manageaddress/manageaddress.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_myaccount_uplodeproducts_uplodeproducts_component__ = __webpack_require__("../../../../../src/app/dashboard/components/myaccount/uplodeproducts/uplodeproducts.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_myaccount_changepassword_changepassword_component__ = __webpack_require__("../../../../../src/app/dashboard/components/myaccount/changepassword/changepassword.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_buynow_buynow_component__ = __webpack_require__("../../../../../src/app/dashboard/components/buynow/buynow.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -757,6 +1173,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+//import { ChangepasswordComponent } from '../login/changepassword/changepassword.component';
+
 var routes = [
     { path: '',
         component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */],
@@ -766,6 +1185,7 @@ var routes = [
             { path: 'productdata', component: __WEBPACK_IMPORTED_MODULE_4__components_productdetails_productdetails_component__["a" /* ProductdetailsComponent */] },
             { path: 'cart', component: __WEBPACK_IMPORTED_MODULE_5__components_cart_cart_component__["a" /* CartComponent */] },
             { path: 'orders', component: __WEBPACK_IMPORTED_MODULE_6__components_orders_orders_component__["a" /* OrdersComponent */] },
+            { path: 'buynow', component: __WEBPACK_IMPORTED_MODULE_12__components_buynow_buynow_component__["a" /* BuynowComponent */] },
             { path: 'myaccount', component: __WEBPACK_IMPORTED_MODULE_7__components_myaccount_myaccount_component__["a" /* MyaccountComponent */],
                 children: [
                     { path: '', component: __WEBPACK_IMPORTED_MODULE_6__components_orders_orders_component__["a" /* OrdersComponent */] },
@@ -773,6 +1193,7 @@ var routes = [
                             { path: '', component: __WEBPACK_IMPORTED_MODULE_8__components_myaccount_personalinformation_personalinformation_component__["a" /* PersonalinformationComponent */] },
                             { path: 'personalinformation', component: __WEBPACK_IMPORTED_MODULE_8__components_myaccount_personalinformation_personalinformation_component__["a" /* PersonalinformationComponent */] },
                             { path: 'manageaddress', component: __WEBPACK_IMPORTED_MODULE_9__components_myaccount_manageaddress_manageaddress_component__["a" /* ManageaddressComponent */] },
+                            { path: 'changepassword', component: __WEBPACK_IMPORTED_MODULE_11__components_myaccount_changepassword_changepassword_component__["a" /* ChangepasswordComponent */] },
                         ] },
                     { path: 'uplodeproducts', component: __WEBPACK_IMPORTED_MODULE_10__components_myaccount_uplodeproducts_uplodeproducts_component__["a" /* UplodeproductsComponent */] },
                 ] },
@@ -786,8 +1207,8 @@ var dashboardRoutingModule = (function () {
 }());
 dashboardRoutingModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
-        exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
+        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
+        exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
     })
 ], dashboardRoutingModule);
 
@@ -878,6 +1299,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_myaccount_personalinformation_personalinformation_component__ = __webpack_require__("../../../../../src/app/dashboard/components/myaccount/personalinformation/personalinformation.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_myaccount_manageaddress_manageaddress_component__ = __webpack_require__("../../../../../src/app/dashboard/components/myaccount/manageaddress/manageaddress.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_myaccount_uplodeproducts_uplodeproducts_component__ = __webpack_require__("../../../../../src/app/dashboard/components/myaccount/uplodeproducts/uplodeproducts.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_myaccount_changepassword_changepassword_component__ = __webpack_require__("../../../../../src/app/dashboard/components/myaccount/changepassword/changepassword.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__validator_module__ = __webpack_require__("../../../../../src/app/validator.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_buynow_buynow_component__ = __webpack_require__("../../../../../src/app/dashboard/components/buynow/buynow.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -900,6 +1324,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+//import { EqualValidator } from '../shared/directives/equal-validator.directive';
+
+
 var dashboardModule = (function () {
     function dashboardModule() {
     }
@@ -911,7 +1339,8 @@ dashboardModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3__dashboard_routing_module__["a" /* dashboardRoutingModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
             __WEBPACK_IMPORTED_MODULE_4_angular4_carousel__["b" /* CarouselModule */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */]
+            __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+            __WEBPACK_IMPORTED_MODULE_17__validator_module__["a" /* validatorModule */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__dashboard_dashboard_component__["a" /* DashboardComponent */],
@@ -925,7 +1354,10 @@ dashboardModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_13__components_myaccount_personalinformation_personalinformation_component__["a" /* PersonalinformationComponent */],
             __WEBPACK_IMPORTED_MODULE_14__components_myaccount_manageaddress_manageaddress_component__["a" /* ManageaddressComponent */],
             __WEBPACK_IMPORTED_MODULE_15__components_myaccount_uplodeproducts_uplodeproducts_component__["a" /* UplodeproductsComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__components_myaccount_changepassword_changepassword_component__["a" /* ChangepasswordComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__components_buynow_buynow_component__["a" /* BuynowComponent */],
         ],
+        exports: [],
         providers: []
     })
 ], dashboardModule);
@@ -1016,7 +1448,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared/components/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"bigstore-navbar\">\n    <div class=\"container\">\n        <div class=\"row row1\">\n            <ul class=\"largenav pull-right\">\n\n                <li class=\"upper-links\" *ngIf=\"!token\"><a class=\"links\" routerLink=\"/login/signup\">SignUp</a></li>\n                <li class=\"upper-links\" *ngIf=\"!token\"><a class=\"links\" routerLink=\"/login\">SignIn</a></li>\n\n                <li class=\"upper-links dropdown\" *ngIf=\"token\"><a class=\"links profile-li\">Welcome back :&nbsp;{{currentUser.full_name}}</a>\n                    <ul class=\"dropdown-menu\">\n                        <li class=\"profile-li\"><a class=\"profile-links\" routerLink=\"/myaccount\">Account</a></li>\n                        <li class=\"profile-li\"><a class=\"profile-links\" routerLink=\"/orders\">Orders</a></li>\n                        <li class=\"profile-li\"><a class=\"profile-links\" (click)=\"logout()\">Logout</a></li>\n                        <!-- <li class=\"profile-li\"><a class=\"profile-links\" href=\"\">Link</a></li>\n                      <li class=\"profile-li\"><a class=\"profile-links\" href=\"\">Link</a></li>\n                      <li class=\"profile-li\"><a class=\"profile-links\" href=\"\">Link</a></li>\n                      <li class=\"profile-li\"><a class=\"profile-links\" href=\"\">Link</a></li> -->\n                    </ul>\n                </li>\n\n            </ul>\n        </div>\n        <div class=\"row row2\">\n            <div class=\"col-sm-2\">\n                <h2 style=\"margin:0px;\"><span class=\"smallnav menu\" >☰ Big Store</span></h2>\n                <h1 style=\"margin:0px; cursor:pointer;\" routerLink=\"/\"><span class=\"largenav\">Big Store</span></h1>\n            </div>\n            <div class=\"bigstore-navbar-search smallsearch col-sm-8 col-xs-11\">\n                <div class=\"row\">\n                    <input class=\"bigstore-navbar-input col-xs-11\" type=\"text\" placeholder=\"Search for Products, Brands and more\" name=\"\">\n                    <button class=\"bigstore-navbar-button col-xs-1\">\n                      <svg width=\"15px\" height=\"15px\">\n                          <path d=\"M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 \"></path>\n                      </svg>\n                  </button>\n                </div>\n            </div>\n            <div class=\"cart largenav col-sm-2\">\n                <a class=\"cart-button\" routerLink=\"/cart\">\n                    <svg class=\"cart-svg \" width=\"16 \" height=\"16 \" viewBox=\"0 0 16 16 \">\n                      <path d=\"M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86 \" fill=\"#fff \"></path>\n                  </svg> Cart\n                  <span class=\"item-number\" *ngIf=\"!token\">0</span>                  \n                 <span class=\"item-number\" *ngIf=\"token\">{{itemslength}}</span>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div id=\"mySidenav\" class=\"sidenav\">\n    <div class=\"container\" style=\"background-color: #2874f0; padding-top: 10px;\">\n        <span class=\"sidenav-heading\">Home</span>\n        <a href=\"javascript:void(0)\" class=\"closebtn\" >×</a>\n    </div>\n    <a routerLink=\"/myaccount\">account</a>\n    <a routerLink=\"/orders\">orders</a>\n    <a (click)=\"logout()\">logout</a>\n    <a href=\"\">Link</a>\n</div>"
+module.exports = "<div id=\"bigstore-navbar\">\n    <div class=\"container\">\n        <div class=\"row row1\">\n            <ul class=\"largenav pull-right\">\n\n                <li class=\"upper-links\" *ngIf=\"!token\"><a class=\"links\" routerLink=\"/login/signup\">SignUp</a></li>\n                <li class=\"upper-links\" *ngIf=\"!token\"><a class=\"links\" routerLink=\"/login\">SignIn</a></li>\n\n                <li class=\"upper-links dropdown\" *ngIf=\"token\"><a class=\"links profile-li\">Welcome back :&nbsp;{{currentUser.full_name}}</a>\n                    <ul class=\"dropdown-menu\">\n                        <li class=\"profile-li\"><a class=\"profile-links\" routerLink=\"/myaccount\">Account</a></li>\n                        <li class=\"profile-li\"><a class=\"profile-links\" routerLink=\"/orders\">Orders</a></li>\n                        <li class=\"profile-li\"><a class=\"profile-links\" (click)=\"logout()\">Logout</a></li>\n                        <!-- <li class=\"profile-li\"><a class=\"profile-links\" href=\"\">Link</a></li>\n                      <li class=\"profile-li\"><a class=\"profile-links\" href=\"\">Link</a></li>\n                      <li class=\"profile-li\"><a class=\"profile-links\" href=\"\">Link</a></li>\n                      <li class=\"profile-li\"><a class=\"profile-links\" href=\"\">Link</a></li> -->\n                    </ul>\n                </li>\n\n            </ul>\n        </div>\n        <div class=\"row row2\">\n            <div class=\"col-sm-2\">\n                <h2 style=\"margin:0px;\"><span class=\"smallnav menu\" >☰ Big Store</span></h2>\n                <h1 style=\"margin:0px; cursor:pointer;\" routerLink=\"/\"><span class=\"largenav\">Big Store</span></h1>\n            </div>\n            <div class=\"bigstore-navbar-search smallsearch col-sm-8 col-xs-11\">\n                <div class=\"row\">\n                    <input class=\"bigstore-navbar-input col-xs-11\" type=\"text\" placeholder=\"Search for Products, Brands and more\" name=\"\" >\n                    <button class=\"bigstore-navbar-button col-xs-1\">\n                      <svg width=\"15px\" height=\"15px\">\n                          <path d=\"M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 \"></path>\n                      </svg>\n                  </button>\n                </div>\n            </div>\n            <div class=\"cart largenav col-sm-2\">\n                <a class=\"cart-button\" routerLink=\"/cart\">\n                    <svg class=\"cart-svg \" width=\"16 \" height=\"16 \" viewBox=\"0 0 16 16 \">\n                      <path d=\"M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86 \" fill=\"#fff \"></path>\n                  </svg> Cart\n                  <span class=\"item-number\" *ngIf=\"!token\">0</span>                  \n                 <span class=\"item-number\" *ngIf=\"token\">{{itemslength}}</span>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div id=\"mySidenav\" class=\"sidenav\">\n    <div class=\"container\" style=\"background-color: #2874f0; padding-top: 10px;\">\n        <span class=\"sidenav-heading\">Home</span>\n        <a href=\"javascript:void(0)\" class=\"closebtn\" >×</a>\n    </div>\n    <a routerLink=\"/myaccount\">account</a>\n    <a routerLink=\"/orders\">orders</a>\n    <a (click)=\"logout()\">logout</a>\n    <a href=\"\">Link</a>\n</div>"
 
 /***/ }),
 
@@ -1101,7 +1533,7 @@ HeaderComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/shared/components/header/header.component.html"),
         styles: [__webpack_require__("../../../../../src/app/shared/components/header/header.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _d || Object])
 ], HeaderComponent);
 
 var _a, _b, _c, _d;

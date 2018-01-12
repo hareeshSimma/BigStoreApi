@@ -87,7 +87,7 @@ var ForgotpasswordComponent = (function () {
             }
         }
         else if (firstChar.match(/[0-9]+$/)) {
-            if (!this.user.email.match(/^[789]\d{9}$/)) {
+            if (!this.user.email.match(/^[6789]\d{9}$/)) {
                 this.invalidMobile = true;
                 this.noUsername = false;
             }
@@ -165,7 +165,7 @@ ForgotpasswordComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login/forgotpassword/forgotpassword.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login/forgotpassword/forgotpassword.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object])
 ], ForgotpasswordComponent);
 
 var Otp = (function () {
@@ -224,8 +224,8 @@ var LoginRoutingModule = (function () {
 }());
 LoginRoutingModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
-        exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
+        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
+        exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
     })
 ], LoginRoutingModule);
 
@@ -306,11 +306,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_routing_module__ = __webpack_require__("../../../../../src/app/login/login-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_validation__ = __webpack_require__("../../../../ng2-validation/dist/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_validation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_validation__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_directives_equal_validator_directive__ = __webpack_require__("../../../../../src/app/shared/directives/equal-validator.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__signup_signup_component__ = __webpack_require__("../../../../../src/app/login/signup/signup.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__signin_signin_component__ = __webpack_require__("../../../../../src/app/login/signin/signin.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__forgotpassword_forgotpassword_component__ = __webpack_require__("../../../../../src/app/login/forgotpassword/forgotpassword.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__signup_signup_component__ = __webpack_require__("../../../../../src/app/login/signup/signup.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__signin_signin_component__ = __webpack_require__("../../../../../src/app/login/signin/signin.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__forgotpassword_forgotpassword_component__ = __webpack_require__("../../../../../src/app/login/forgotpassword/forgotpassword.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__validator_module__ = __webpack_require__("../../../../../src/app/validator.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -322,12 +322,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+//import { EqualValidator } from '../shared/directives/equal-validator.directive';
 
 
 
 
 
-// import { DashboardService } from '../shared/services/dashboard.service';
 var LoginModule = (function () {
     function LoginModule() {
     }
@@ -340,14 +340,16 @@ LoginModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
             __WEBPACK_IMPORTED_MODULE_4_ng2_validation__["CustomFormsModule"],
+            __WEBPACK_IMPORTED_MODULE_9__validator_module__["a" /* validatorModule */]
         ],
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__signup_signup_component__["a" /* SignupComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__signin_signin_component__["a" /* SigninComponent */],
-            __WEBPACK_IMPORTED_MODULE_5__shared_directives_equal_validator_directive__["a" /* EqualValidator */],
-            __WEBPACK_IMPORTED_MODULE_9__forgotpassword_forgotpassword_component__["a" /* ForgotpasswordComponent */]
+            __WEBPACK_IMPORTED_MODULE_5__login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__signup_signup_component__["a" /* SignupComponent */],
+            __WEBPACK_IMPORTED_MODULE_7__signin_signin_component__["a" /* SigninComponent */],
+            // EqualValidator,
+            __WEBPACK_IMPORTED_MODULE_8__forgotpassword_forgotpassword_component__["a" /* ForgotpasswordComponent */],
         ],
+        exports: [],
         providers: []
     })
 ], LoginModule);
@@ -438,7 +440,7 @@ var SigninComponent = (function () {
             }
         }
         else if (firstChar.match(/[0-9]+$/)) {
-            if (!this.user.email.match(/^[789]\d{9}$/)) {
+            if (!this.user.email.match(/^[6789]\d{9}$/)) {
                 this.invalidMobile = true;
                 this.noUsername = false;
             }
@@ -472,7 +474,7 @@ SigninComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login/signin/signin.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login/signin/signin.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_jwt_service__["a" /* JwtService */]) === "function" && _c || Object])
 ], SigninComponent);
 
 var _a, _b, _c;
@@ -501,7 +503,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/signup/signup.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n    <div class=\"alert alert-success alert-dismissable fade in\" *ngIf=\"msg && msg.Success == true\">\n        <a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n        <strong>Success!</strong> {{msg.msg}}.\n    </div>\n\n    <!-- <div class=\"alert alert-danger alert-dismissable fade in\" *ngIf=\"msg && !msg.Success == true\">\n        <a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n        <strong>Sorry!</strong> {{msg.msg}}.\n    </div> -->\n    <div class=\"alert alert-danger alert-dismissable fade in\" *ngIf=\"errors\">\n        <a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n        <strong>Sorry!</strong> {{errors}}.\n    </div>\n\n\n    <!-- <div class=\"alert alert-success\" *ngIf=\"msg && msg.Success == true\">\n        <strong>Success!</strong> {{msg.msg}}\n      </div>\n      <div class=\"alert alert-danger\" *ngIf=\"msg && !msg.Success == true ;else error\">\n        <strong>Sorry!</strong> {{msg.msg}}\n      </div>\n      <div class=\"alert alert-danger\" *ngIf=\"errors\">\n            <strong>Sorry!</strong> Invalid Data..\n          </div> -->\n    <div class=\"col-md-10 col-md-offset-1 main\">\n        <div class=\"col-md-6 left-side\">\n            <h2>Welcome To.... BigStore</h2>\n            <!-- <h2>BigSore</h2> -->\n            <br>\n            <div class=\"createaccount\">\n                <!-- <span>Already Member</span> -->\n                <button class=\"btn\" routerLink=\"/login/signin\">Login</button>\n\n            </div>\n            <div class=\"createaccount\">\n                <button class=\"btn\" (click)=\"cancel()\">Cancel</button>\n\n            </div>\n        </div>\n        <!--col-sm-6-->\n\n        <div class=\"col-md-6 right-side\">\n            <h3>Create New Account</h3>\n\n            <!--Form with header-->\n            <div class=\"form\">\n                <form #myForm=\"ngForm\">\n                    <div class=\"form-group\">\n                        <label for=\"form2\">Full Name</label>\n                        <input type=\"text\" id=\"form1\" class=\"form-control input-lg\" [(ngModel)]=\"user.fullname\" #fullname=\"ngModel\" name=\"fullname\" required>\n                        <div *ngIf=\"fullname.errors && (fullname.dirty || fullname.touched)\" class=\"error\">\n                            <div [hidden]=\"!fullname.errors.required\">Please Enter Your Full Name.</div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"form2\"> E-mail ID</label>\n                        <input type=\"text\" id=\"form2\" class=\"form-control input-lg\" [(ngModel)]=\"user.email\" pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$\" name=\"email\" #email=\"ngModel\" required>\n                        <div *ngIf=\"email.errors && (email.dirty || email.touched)\" class=\"error\">\n                            <div [hidden]=\"!email.errors.required\">Please Enter Your Valid Email Id.</div>\n                            <div [hidden]=\"!email.errors.pattern\">Please Enter proper Email correctly.</div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"form2\">Your Mobile Number</label>\n\n                        <input type=\"text\" id=\"form3\" class=\"form-control input-lg\" [(ngModel)]=\"user.mobile\" pattern=\"^[789]\\d{9}$\" #mobile=\"ngModel\" name=\"mobile\" required>\n                        <div *ngIf=\"mobile.errors && (mobile.dirty || mobile.touched)\" class=\"error\">\n                            <div [hidden]=\"!mobile.errors.required\">Please Enter Your Mobile Number.</div>\n                            <div [hidden]=\"!mobile.errors.pattern\">Please Enter valid Mobile Number.</div>\n\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"form4\">Your password</label>\n                        <input type=\"password\" id=\"form4\" class=\"form-control input-lg\" [(ngModel)]=\"user.password\" minlength=\"6\" #password=\"ngModel\" name=\"password\" required>\n                        <div *ngIf=\"password.errors && (password.dirty || password.touched)\" class=\"error\">\n                            <div [hidden]=\"!password.errors.required\">Please Enter Password.</div>\n                            <div [hidden]=\"!password.errors.minlength\">Password shuld be min 6 Charactors.</div>\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"form4\"> Confirm Your password</label>\n                        <input type=\"password\" id=\"form5\" class=\"form-control input-lg\" [(ngModel)]=\"user.confirmpass\" validateEqual=\"password\" minlength=\"6\" #confirmpass=\"ngModel\" name=\"confirmpass\" id=\"confpassword\">\n                        <div *ngIf=\"confirmpass.errors && (confirmpass.dirty || confirmpass.touched)\" class=\"error\">\n                            <div [hidden]=\"!confirmpass.errors.required\">Please Enter Password.</div>\n                            <div [hidden]=\"!confirmpass.errors.minlength\">Password shuld be min 6 Charactors.</div>\n                            <div [hidden]=\"confirmpass.valid || (confirmpass.pristine && !myForm.submitted)\">\n                                Password mismatch\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"text-xs-center\">\n                        <button class=\"btn btn-deep-purple\" type=\"submit\" [disabled]=\"!myForm.form.valid\" (click)=\"newUser(user)\">Create</button>\n                    </div>\n\n                </form>\n            </div>"
+module.exports = "<div class=\"container\">\n\n    <div class=\"alert alert-success alert-dismissable fade in\" *ngIf=\"msg && msg.Success == true\">\n        <a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n        <strong>Success!</strong> {{msg.msg}}.\n    </div>\n\n    <!-- <div class=\"alert alert-danger alert-dismissable fade in\" *ngIf=\"msg && !msg.Success == true\">\n        <a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n        <strong>Sorry!</strong> {{msg.msg}}.\n    </div> -->\n    <div class=\"alert alert-danger alert-dismissable fade in\" *ngIf=\"errors\">\n        <a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n        <strong>Sorry!</strong> {{errors}}.\n    </div>\n\n\n\n    <div class=\"col-md-10 col-md-offset-1 main\">\n        <div class=\"col-md-6 left-side\">\n            <h2>Welcome To.... BigStore</h2>\n            <!-- <h2>BigSore</h2> -->\n            <br>\n            <div class=\"createaccount\">\n                <!-- <span>Already Member</span> -->\n                <button class=\"btn\" routerLink=\"/login/signin\">Login</button>\n\n            </div>\n            <div class=\"createaccount\">\n                <button class=\"btn\" (click)=\"cancel()\">Cancel</button>\n\n            </div>\n        </div>\n        <!--col-sm-6-->\n\n        <div class=\"col-md-6 right-side\">\n            <h3>Create New Account</h3>\n\n            <!--Form with header-->\n            <div class=\"form\">\n                <form #myForm=\"ngForm\">\n                    <div class=\"form-group\">\n                        <label for=\"form2\">Full Name</label>\n                        <input type=\"text\" id=\"form1\" class=\"form-control input-lg\" [(ngModel)]=\"user.fullname\" #fullname=\"ngModel\" name=\"fullname\" required>\n                        <div *ngIf=\"fullname.errors && (fullname.dirty || fullname.touched)\" class=\"error\">\n                            <div [hidden]=\"!fullname.errors.required\">Please Enter Your Full Name.</div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"form2\"> E-mail ID</label>\n                        <input type=\"text\" id=\"form2\" class=\"form-control input-lg\" [(ngModel)]=\"user.email\" pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$\" name=\"email\" #email=\"ngModel\" required>\n                        <div *ngIf=\"email.errors && (email.dirty || email.touched)\" class=\"error\">\n                            <div [hidden]=\"!email.errors.required\">Please Enter Your Valid Email Id.</div>\n                            <div [hidden]=\"!email.errors.pattern\">Please Enter proper Email correctly.</div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"form2\">Your Mobile Number</label>\n\n                        <input type=\"text\" id=\"form3\" class=\"form-control input-lg\" [(ngModel)]=\"user.mobile\" pattern=\"^[6789]\\d{9}$\" #mobile=\"ngModel\" name=\"mobile\" required>\n                        <div *ngIf=\"mobile.errors && (mobile.dirty || mobile.touched)\" class=\"error\">\n                            <div [hidden]=\"!mobile.errors.required\">Please Enter Your Mobile Number.</div>\n                            <div [hidden]=\"!mobile.errors.pattern\">Not a valid Mobile Number.</div>\n\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"form4\">Your password</label>\n                        <input type=\"password\" id=\"form4\" class=\"form-control input-lg\" [(ngModel)]=\"user.password\" minlength=\"6\" #password=\"ngModel\" name=\"password\" required>\n                        <div *ngIf=\"password.errors && (password.dirty || password.touched)\" class=\"error\">\n                            <div [hidden]=\"!password.errors.required\">Please Enter Password.</div>\n                            <div [hidden]=\"!password.errors.minlength\">Password shuld be min 6 Charactors.</div>\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"form4\"> Confirm Your password</label>\n                        <input type=\"password\" id=\"form5\" class=\"form-control input-lg\" [(ngModel)]=\"user.confirmpass\" validateEqual=\"password\" minlength=\"6\" #confirmpass=\"ngModel\" name=\"confirmpass\" id=\"confpassword\">\n                        <div *ngIf=\"confirmpass.errors && (confirmpass.dirty || confirmpass.touched)\" class=\"error\">\n                            <div [hidden]=\"!confirmpass.errors.required\">Please Enter Password.</div>\n                            <div [hidden]=\"!confirmpass.errors.minlength\">Password shuld be min 6 Charactors.</div>\n                            <div [hidden]=\"confirmpass.valid || (confirmpass.pristine && !myForm.submitted)\">\n                                Password mismatch\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"text-xs-center\">\n                        <button class=\"btn btn-deep-purple\" type=\"submit\" [disabled]=\"!myForm.form.valid\" (click)=\"newUser(user)\">Create</button>\n                    </div>\n\n                </form>\n            </div>"
 
 /***/ }),
 
@@ -563,90 +565,11 @@ SignupComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login/signup/signup.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login/signup/signup.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object])
 ], SignupComponent);
 
 var _a, _b;
 //# sourceMappingURL=signup.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/shared/directives/equal-validator.directive.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EqualValidator; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-
-
-var EqualValidator = EqualValidator_1 = (function () {
-    function EqualValidator(validateEqual, reverse) {
-        this.validateEqual = validateEqual;
-        this.reverse = reverse;
-    }
-    Object.defineProperty(EqualValidator.prototype, "isReverse", {
-        get: function () {
-            if (!this.reverse)
-                return false;
-            return this.reverse === 'true' ? true : false;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    EqualValidator.prototype.validate = function (c) {
-        // self value
-        var v = c.value;
-        // control vlaue
-        var e = c.root.get(this.validateEqual);
-        // value not equal
-        if (e && v !== e.value && !this.isReverse) {
-            return {
-                validateEqual: false
-            };
-        }
-        // value equal and reverse
-        if (e && v === e.value && this.isReverse) {
-            delete e.errors['validateEqual'];
-            if (!Object.keys(e.errors).length)
-                e.setErrors(null);
-        }
-        // value not equal and reverse
-        if (e && v !== e.value && this.isReverse) {
-            e.setErrors({
-                validateEqual: false
-            });
-        }
-        return null;
-    };
-    return EqualValidator;
-}());
-EqualValidator = EqualValidator_1 = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"])({
-        selector: '[validateEqual][formControlName],[validateEqual][formControl],[validateEqual][ngModel]',
-        providers: [
-            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["NG_VALIDATORS"], useExisting: Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return EqualValidator_1; }), multi: true }
-        ]
-    }),
-    __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Attribute"])('validateEqual')),
-    __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Attribute"])('reverse')),
-    __metadata("design:paramtypes", [String, String])
-], EqualValidator);
-
-var EqualValidator_1;
-//# sourceMappingURL=equal-validator.directive.js.map
 
 /***/ })
 
