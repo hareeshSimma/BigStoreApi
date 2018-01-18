@@ -662,8 +662,7 @@ JwtService = __decorate([
 // The file contents for the current environment will overwrite these during build.
 var environment = {
     production: false,
-    //api_url: '/',
-    api_url: 'http://localhost:3000',
+    api_url: '/',
 };
 //# sourceMappingURL=environment.js.map
 
