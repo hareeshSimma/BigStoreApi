@@ -136,6 +136,10 @@ MIT
 MIT
 MIT
 
+@angular/animations@4.4.6
+MIT
+MIT
+
 libphonenumber-js@0.4.43
 MIT
 (The MIT License)
